@@ -8,6 +8,8 @@ import entities.Client;
 public class Principale {
 
 	public static void main(String[] args) {
+		/*
+		
 		//STEP 1 : On va lire les données depuis le clavier
 		
 		Scanner lect = new Scanner(System.in);
@@ -34,6 +36,15 @@ public class Principale {
 		
 		//STEP 4 : On persist
 		daoclient.addClient(c);
+		
+		*/
+		
+		//Recherche d'un Client par son code
+		DaoClient daoclient = new DaoClient();
+		//Client res = daoclient.getClient(400);
+		Client res = daoclient.deleteClient(2000);
+		//System.out.println(res.toString());
+		System.out.println(res);
 
 	}
 

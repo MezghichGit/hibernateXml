@@ -38,6 +38,7 @@ public class Client{
 		this.prénom = prenom;
 	}
 
+	@Override
 	public String toString() {
 		return "Je suis le client : " + clientId + " nommé : " + nom + " " + prénom;
 	}
