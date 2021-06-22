@@ -30,9 +30,9 @@ public class DaoClient {
                     // afin de garder la cohérence des données
 				session.close();
 			}
-			session.close();// fermeture de la session hibernate
+			
 		}
-		
+		session.close();// fermeture de la session hibernate
 		return temp;
 	}
 	
@@ -55,9 +55,9 @@ public class DaoClient {
                     // afin de garder la cohérence des données
 				session.close();
 			}
-			session.close();// fermeture de la session hibernate
-		}
 		
+		}
+		session.close();// fermeture de la session hibernate
 		return c;
 		
 		
@@ -84,13 +84,40 @@ public class DaoClient {
 	                    // afin de garder la cohérence des données
 					session.close();
 				}
-				session.close();// fermeture de la session hibernate
+				
 			}
-			
+			session.close();// fermeture de la session hibernate
 			return c;
 			
 			
 		}
 	//update
+		
+		//updateClient permet de mettre à jour un client avec id
+		public Client updateClient(int id, String nom)
+		{
+			Client c=null;
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			Transaction tx = null;
+			try {
+				tx = session.beginTransaction(); // débuter la transaction
+				
+				 c= (Client)session.load(Client.class,id);
+				 c.setNom(nom);
+				 session.save(c) ; //suppression de l’objet « c »
+				tx.commit();
+			} 
+			catch (Exception e) {
+				//System.out.println("Un problème dans la base");
+				if (tx != null) {
+					tx.rollback();// on effectue un roll back en cas d’exception
+	                    // afin de garder la cohérence des données
+					session.close();
+				}
+				
+			}
+			session.close();// fermeture de la session hibernate
+			return c;
+		}
 	//getAll
 }

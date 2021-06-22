@@ -42,7 +42,8 @@ public class Principale {
 		//Recherche d'un Client par son code
 		DaoClient daoclient = new DaoClient();
 		//Client res = daoclient.getClient(400);
-		Client res = daoclient.deleteClient(2000);
+		//Client res = daoclient.deleteClient(2000);
+		Client res = daoclient.updateClient(500,"François");
 		//System.out.println(res.toString());
 		System.out.println(res);
 
