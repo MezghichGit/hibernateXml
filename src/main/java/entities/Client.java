@@ -1,7 +1,6 @@
 package entities;
 
-public class Client implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
+public class Client{
 	private int clientId;
 	private String nom;
 	private String prénom;
