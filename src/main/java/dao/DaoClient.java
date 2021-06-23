@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -157,4 +158,51 @@ public class DaoClient {
 			session.close();// fermeture de la session hibernate
 			return ls;
 		}
+		
+		//get number of client
+		public Long getCountClient() {
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			Transaction tx = null;
+			Long numberOfClient = null;
+			try {
+				tx = session.beginTransaction();
+				String hql = "select count(*) from Client";
+				Query query = session.createQuery(hql);
+				numberOfClient  = (Long) query.uniqueResult();
+				
+				tx.commit();
+			} catch (Exception e) {
+				if (tx != null) {
+					tx.rollback();
+					session.close();
+				}
+				
+			}
+			session.close();
+			
+			return numberOfClient;
+		}
+		
+		// get client order by IdClient Desc
+		public List<Client> getAllClientDesc() {
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			Transaction tx = null;
+			List<Client> ls = null;
+			try {
+				tx = session.beginTransaction();
+				String hql = "from Client order by clientId desc";
+				Query query = session.createQuery(hql);
+				ls  =  query.list();
+				tx.commit();
+			} catch (Exception e) {
+				if (tx != null) {
+					tx.rollback();
+					session.close();
+				}
+				
+			}
+			session.close();
+			return ls;
+		}
+		
 }

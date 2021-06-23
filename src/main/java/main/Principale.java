@@ -45,11 +45,15 @@ public class Principale {
 		//Client res = daoclient.getClient(400);
 		//Client res = daoclient.deleteClient(2000);
 		//Client res = daoclient.updateClient(500,"François");
-		List<Client> res = daoclient.getAllClient();
+		//List<Client> res = daoclient.getAllClient();
+		//System.out.println(res.size());
+		
+		List<Client> res = daoclient.getAllClientDesc();
 		for(Client c : res)
 		{
 			System.out.println(c);
 		}
+		System.out.println(daoclient.getCountClient());
 		//System.out.println(res.toString());
 		//System.out.println(res);
 
