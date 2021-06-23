@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -120,4 +123,38 @@ public class DaoClient {
 			return c;
 		}
 	//getAll
+		
+		public List<Client> getAllClient()
+		{
+			List<Client> ls=null;
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			Transaction tx = null;
+			try {
+				tx = session.beginTransaction(); // débuter la transaction
+				
+				//Méthode 1
+				 ls = (List<Client>)session.createCriteria(Client.class).list();
+				// Fin méthode 1
+				
+				//Méthode 2: HQL
+				//String hql = "from Client";
+				//Query query = session.createQuery(hql);
+				//ls = query.list();
+				// Fin méthode 2
+				 
+				//System.out.println(ls);
+				tx.commit();
+			} 
+			catch (Exception e) {
+				//System.out.println("Un problème dans la base");
+				if (tx != null) {
+					tx.rollback();// on effectue un roll back en cas d’exception
+	                    // afin de garder la cohérence des données
+					session.close();
+				}
+				
+			}
+			session.close();// fermeture de la session hibernate
+			return ls;
+		}
 }
